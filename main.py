@@ -18,6 +18,12 @@ MATCH (n:Node {nombre: 'Dianna'})
 MATCH(m)
 MATCH (n)-[r:CONOCE_A]->(m)
 RETURN count(r)
+
+
+MATCH (a:Node {nodeID: '285312927'})
+MATCH(m)
+MATCH (a)-[r:RELATION]-(m)
+RETURN m
 """
 from neo4j import GraphDatabase
 
@@ -27,9 +33,24 @@ driver = GraphDatabase.driver(uri, auth=None)
 def main(tx):
     for record in tx.run("MATCH (a:Node {nodeID: '285312927'})"
                          "MATCH(m)"
-                        "MATCH (a)-[r:RELATION]-(m)"
+                        "MATCH (a)-[r:RELATION]->(m)"
                          "RETURN m" ):
-        print(record["m"])
+        print("hey",record["m"])
+
+    for record in tx.run("MATCH (n:Node {nodeID: '285312927'})"
+                            "MATCH(m)"
+                            "MATCH (n)-[r:RELATION]->(m)"
+                            "RETURN count(r) "):
+        print(record["count(r)"])
+
+
+    for record in tx.run("MATCH ()<-[r:RELATION]-(u:Node)"
+                            "With u,count(r) as seguidores"
+                            "Return u.nodeID,seguidores"
+                            "Order By seguidores DESC"
+                            "Limit 5 "
+                            ):
+        print(record["u.nodeID"])
 
 with driver.session() as session:
     session.read_transaction(main)
