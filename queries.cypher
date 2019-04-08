@@ -13,4 +13,9 @@ Where NOT (u2)-[:SIGUE_A]->(u)
 Return u2.nodeID
 Limit 10
 
-//
+//# de seguidos y seguidores de un usuario
+MATCH (u:Node {nodeID:115485051})-[r:SIGUE_A]->(:Node)
+With count(r) as seguidos
+MATCH (u:Node {nodeID:115485051})<-[r2:SIGUE_A]-(:Node)
+With seguidos,count(r2) as seguidores
+Return seguidos,seguidores
