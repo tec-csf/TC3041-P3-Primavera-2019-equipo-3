@@ -1,3 +1,5 @@
+sudo docker run --name=neo4j -m=4g --publish=7474:7474 --publish=7687:7687 --volume=$HOME/neo4j/data:/data --env=NEO4J_AUTH=none neo4j
+
 docker cp nodeID.csv neo4j:/var/lib/neo4j/import/nodeID.csv
 docker cp twitter_combined.csv neo4j:/var/lib/neo4j/import/twitter_combined.csv
 

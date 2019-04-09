@@ -1,23 +1,23 @@
 //El id del usuario y el # de seguidores de los 5 usuarios con más seguidores.
-
+MATCH ()<-[r:SIGUE_A]-(u:Node)
 With u,count(r) as seguidores
 Return u.nodeID,seguidores
 Order By seguidores DESC
 Limit 5
 
-
-MATCH (a:Node {nodeID: '285312927'})
+//Dado un usuario devolver todos los usuarios que sigue
+MATCH (a:Node {nodeID: 285312927})
 MATCH(m)
-MATCH (a)-[r:RELATION]->(m)
+MATCH (a)-[r:SIGUE_A]->(m)
 RETURN m
 
-
-MATCH (n:Node {nodeID: '285312927'})
+//Dado un usuario devolver cuantos usurios sigue
+MATCH (n:Node {nodeID: 285312927})
 MATCH(m)
-MATCH (n)-[r:RELATION]->(m)
+MATCH (n)-[r:SIGUE_A]->(m)
 RETURN count(r)
-//Dado un usuario checar los usuarios que el sigue pero no le dieron followback.
 
+//Dado un usuario checar los usuarios que el sigue pero no le dieron followback.
 MATCH (u:Node {nodeID:18581803})-[r:SIGUE_A]->(u2:Node)
 Where NOT (u2)-[:SIGUE_A]->(u)
 Return u2.nodeID
