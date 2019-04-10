@@ -32,7 +32,7 @@ def main(tx):
                     print("Seguidores: ",record["count(r)"],'\n')
 
             elif n==3:
-                for record in tx.run("MATCH ()-[r:SIGUE_A]->(u:Node)" "RETURN DISTINCT u.nodeID,count(r) Order By count(r) DESC Limit 5"):
+                for record in tx.run("MATCH ()-[r:SIGUE_A]->(u:Node)" "RETURN u.nodeID,count(r) Order By count(r) DESC Limit 5"):
                     print("Usuario: ",record["u.nodeID"],"\tSeguidores: ",record["count(r)"])    
 
 with driver.session() as session:
