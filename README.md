@@ -38,8 +38,8 @@ MERGE (start)-[:SIGUE_A]->(end);`
 * Corra el comando `python main.py`
 
 ## 5. Detenga y elimine el contenedor.
-* docker stop neo4j
-* docker rm neo4j
+* `docker stop neo4j`
+* `docker rm neo4j`
 
 
 
