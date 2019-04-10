@@ -5,6 +5,7 @@ Orientaciones para la Práctica 3. Graph databases
 * Tener instalado `docker`. Mas información se encuentra disponible en [Docker](https://www.docker.com/community-edition).
 * Acceso a Internet.
 * Clonar este repositorio.
+* Tener instalado Python3.
 
 ## 1. Levantar un contenedor con neo4j
 `docker run --name=neo4j -m=4g --publish=7474:7474 --publish=7687:7687 --volume=$HOME/neo4j/data:/data --env=NEO4J_AUTH=none neo4j`
@@ -30,6 +31,15 @@ LOAD CSV WITH HEADERS FROM "file:/twitter_combined.csv" AS row
 MATCH (start:Node {nodeID: toInt(row.StartId)})
 MATCH (end:Node {nodeID: toInt(row.EndId)})
 MERGE (start)-[:SIGUE_A]->(end);`
+
+## 4. Compile la aplicación.
+* Corra la aplicación y visualice las 3 consultas.
+* Para correr la aplicación, verifique que esté en la misma ruta del archivo `main.py`
+* Corra el comando `python main.py`
+
+## 5. Detenga y elimine el contenedor.
+* docker stop neo4j
+* docker rm neo4j
 
 
 
