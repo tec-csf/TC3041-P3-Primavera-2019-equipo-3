@@ -12,11 +12,8 @@ def main(tx):
         print("2. ¿A cuántos usuarios sigue Justin Bieber?")
         print("3. ¿Los 5 usuarios con más seguidores?")
         print("4. Salir")
-        #n=3
         n = int(input("Escoge un número: ")) 
-        #print(num)
         if n == 4:
-            #print("ent")
             break 
         else:
             if n==1:
@@ -37,9 +34,6 @@ def main(tx):
             elif n==3:
                 for record in tx.run("MATCH ()-[r:SIGUE_A]->(u:Node)" "RETURN DISTINCT u.nodeID,count(r) Order By count(r) DESC Limit 5"):
                     print("Usuario: ",record["u.nodeID"],"\tSeguidores: ",record["count(r)"])    
-                    #q = record["u.nodeID"] + str(record["count(r)"])
-                    #print(q)
-                    #print(query,record["seguidores"])
 
 with driver.session() as session:
     session.read_transaction(main) 
