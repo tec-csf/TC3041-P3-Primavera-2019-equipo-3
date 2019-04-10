@@ -32,7 +32,7 @@ MATCH (start:Node {nodeID: toInt(row.StartId)})
 MATCH (end:Node {nodeID: toInt(row.EndId)})
 MERGE (start)-[:SIGUE_A]->(end);`
 
-## 4. Compile la aplicación.
+## 4. Corra la aplicación.
 * Corra la aplicación y visualice las 3 consultas.
 * Para correr la aplicación, verifique que esté en la misma ruta del archivo `main.py`
 * Corra el comando `python main.py`
